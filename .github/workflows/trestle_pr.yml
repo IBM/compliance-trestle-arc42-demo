@@ -1,0 +1,35 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+name: Trestle PR Pipeline
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+  
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Install tooling
+      run: |
+        make install
+    - name: Install pre-commit
+      run: |
+        make pre-commit
+    - name: Markdown formatting
+      run: |
+        make mdformat
+    - name: Validate documents adhere to template
+      run: |
+        make validate
+    - name: Validate documents adhere to template (expecting to fail)
+      continue-on-error: true
+      run: |
+        make validate-expect-failure

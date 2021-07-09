@@ -18,7 +18,8 @@ This repository has been setup with three trestle author tasks:
 This demo is at two levels:
 
 - The first is the setup instructions below. The setup instructions for these three workflows shows how to create a 'new' file(s) for editing using `trestle author {docs|folders} create sample`
-- The second is the repository has been setup with travis. Travis calls `trestle author {docs|folders} validate` via a Makefile to act as a CI validation (e.g. before merging content).
+- The second is the repository has been setup with Github actions. Github actions calls `trestle author {docs|folders} validate` via a Makefile to act as a CI validation (e.g. before merging content).
+  - Note: Github actions has been configured to allow validation failure of the `arc42-single-failure` task.
 
 ## How this demo was setup
 
