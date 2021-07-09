@@ -1,77 +1,58 @@
-<!-- This should be the location of the title of the repository, normally the short name -->
-# repo-template
+# compliance-trestle-arc42-demo
 
-<!-- Build Status, is a great thing to have at the top of your repository, it shows that you take your CI/CD as first class citizens -->
-<!-- [![Build Status](https://travis-ci.org/jjasghar/ibm-cloud-cli.svg?branch=master)](https://travis-ci.org/jjasghar/ibm-cloud-cli) -->
+This demonstration is designed to show how trestle author can be used on architectural template to enforce consistency within an organisation.
 
-<!-- Not always needed, but a scope helps the user understand in a short sentance like below, why this repo exists -->
-## Scope
+## arc42 license:
 
-The purpose of this project is to provide a template for new open source repositories.
+arc42 is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/). The arc42 files in this repository have been modified for use within this demo.
+If you need arc42 content please go [here](https://arc42.org/download).
 
-<!-- A more detailed Usage or detailed explaination of the repository here -->
-## Usage
+## Instructions on using this demo
 
-This repository contains some example best practices for open source repositories:
+This repository has been setup with three trestle author tasks:
 
-* [LICENSE](LICENSE)
-* [README.md](README.md)
-* [CONTRIBUTING.md](CONTRIBUTING.md)
-* [MAINTAINERS.md](MAINTAINERS.md)
-<!-- A Changelog allows you to track major changes and things that happen, https://github.com/github-changelog-generator/github-changelog-generator can help automate the process -->
-* [CHANGELOG.md](CHANGELOG.md)
+- `arc42-single` - Demonstrating use of trestle to validate the single file template
+- `arc42-multidoc` - Demonstrating the use of trestle to validate a cohesive set of documents
+- `arc42-single-failure` - intentionally demonstrating failure.
 
-> These are optional
+This demo is at two levels:
 
-<!-- The following are OPTIONAL, but strongly suggested to have in your repository. -->
-* [dco.yml](.github/dco.yml) - This enables DCO bot for you, please take a look https://github.com/probot/dco for more details.
-* [travis.yml](.travis.yml) - This is a example `.travis.yml`, please take a look https://docs.travis-ci.com/user/tutorial/ for more details.
+- The first is the setup instructions below. The setup instructions for these three workflows shows how to create a 'new' file(s) for editing using `trestle author {docs|folders} create sample`
+- The second is the repository has been setup with Github actions. Github actions calls `trestle author {docs|folders} validate` via a Makefile to act as a CI validation (e.g. before merging content).
+  - Note: Github actions has been configured to allow validation failure of the `arc42-single-failure` task.
 
-These may be copied into a new or existing project to make it easier for developers not on a project team to collaborate.
+## How this demo was setup
 
-<!-- A notes section is useful for anything that isn't covered in the Usage or Scope. Like what we have below. -->
-## Notes
+- `trestle init` was run inside the repository
 
-**NOTE: While this boilerplate project uses the Apache 2.0 license, when
-establishing a new repo using this template, please use the
-license that was approved for your project.**
+- OSCAL model directories, unnecessary for this demo, were removed (see [issue to resolve](https://github.com/IBM/compliance-trestle/issues/352))
 
-**NOTE: This repository has been configured with the [DCO bot](https://github.com/probot/dco).
-When you set up a new repository that uses the Apache license, you should
-use the DCO to manage contributions. The DCO bot will help enforce that.
-Please contact one of the IBM GH Org stewards.**
+- `trestle author docs setup -tn arc42-single` was run to setup for the single file architecture template
 
-<!-- Questions can be useful but optional, this gives you a place to say, "This is how to contact this project maintainers or create PRs -->
-If you have any questions or issues you can create a new [issue here][issues].
+  - The [arc42 github template](https://github.com/arc42/arc42-template/blob/master/dist/arc42-template-EN-plain-gitHubMarkdown.zip) was downloaded
+  - The template file was copied to the [template file](.trestle/author/arc42-single/template.md)
+  - The template was customized by 'commenting out' where the template provided exemplar headings (exemplar headings can not be enforced with trestle author).
+  - `trestle author docs create-sample -tn arc42-single`
+  - `trestle author docs validate -tn arc42-single` was called for testing the template / instance
+  - The sample was edited.
+  - `trestle author docs validate -tn arc42-single` was called to validate the setup.
 
-Pull requests are very welcome! Make sure your patches are well tested.
-Ideally create a topic branch for every separate change you make. For
-example:
+- `trestle author folders setup -tn arc42-multidoc` was run to setup for multiple file setups.
 
-1. Fork the repo
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Added some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+  - The [arc42 github template](https://github.com/arc42/arc42-template/blob/master/dist/arc42-template-EN-plain-gitHubMarkdownMP.zip) was downloaded.
+  - The template file was copied to the [template file](.trestle/author/arc42-single/template.md)
+  - As with the single file content that was not appropriate for trestle author templates was commented out.
+    - Note for MD format HTML comment lines must not be the last line in the file (there should be one blank line)
+  - `trestle author folders create-sample -tn arc42-multidoc` to create a sample
+    - Sample was edited.
+  - `trestle author folders validate -tn arc42-multidoc`
 
-## License
+- `trestle author docs setup -tn arc42-single-failure` was run to setup for the single file architecture template where it would fail validaation
 
-All source files must include a Copyright and License header. The SPDX license header is 
-preferred because it can be easily scanned.
-
-If you would like to see the detailed LICENSE click [here](LICENSE).
-
-```text
-#
-# Copyright 2020- IBM Inc. All rights reserved
-# SPDX-License-Identifier: Apache2.0
-#
-```
-## Authors
-
-Optionally, you may include a list of authors, though this is redundant with the built-in
-GitHub list of contributors.
-
-- Author: New OpenSource IBMer <new-opensource-ibmer@ibm.com>
-
-[issues]: https://github.com/IBM/repo-template/issues/new
+  - The [arc42 github template](https://github.com/arc42/arc42-template/blob/master/dist/arc42-template-EN-plain-gitHubMarkdown.zip) was downloaded
+  - The template file was copied to the [template file](.trestle/author/arc42-single/template.md)
+  - The template was customized by 'commenting out' where the template provided exemplar headings (exemplar headings can not be enforced with trestle author).
+  - `trestle author docs create-sample -tn arc42-single`
+  - `trestle author docs validate -tn arc42-single` was called for testing the template / instance
+  - The sample was edited in a way designed to intentionally break the template. E.g. a required heading in the template was removed.
+  - `trestle author docs validate -tn arc42-single` was called to validate the setup and ensure a failure condition was reached.
