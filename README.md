@@ -1,6 +1,6 @@
 # compliance-trestle-arc42-demo
 
-This demonstration of part of [complinance-trestle](https://ibm.github.io/compliance-trestle). It is designed to demonstrate `trestle author` a set of functionality designed to support automation for content created, typically in a source code repository.
+This demonstration of part of [compliance-trestle](https://ibm.github.io/compliance-trestle). It is designed to demonstrate `trestle author` a set of functionality designed to support automation for content created, typically in a source code repository.
 
 For this demonstration `trestle author docs` and `trestle author folders` is used. These functions are used to validate (individual documents, and folders of documents, respectively), markdown files against a template. The template is enforced based on the heading structure. For more information see the [trestle website](https://ibm.github.io/compliance-trestle/trestle_author/#governance-mechanisms).
 
